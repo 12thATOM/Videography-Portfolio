@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-serif: 'Cinzel', serif;
+    --font-heading: 'Syne', 'Plus Jakarta Sans', sans-serif;
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: #0A0A0A;
+    color: #F5F5F5;
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+
+  .font-serif-luxury {
+    font-family: var(--font-serif);
+  }
+
+  /* Minimum touch target size for mobile */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  @media (min-width: 640px) {
+    .touch-target {
+      min-height: auto;
+      min-width: auto;
+    }
+  }
+}
+
+/* Safe area padding for notched phones */
+.safe-top {
+  padding-top: var(--safe-top);
+}
+
+.safe-bottom {
+  padding-bottom: var(--safe-bottom);
+}
+
+.safe-x {
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #262626;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #404040;
+}
+
+/* Glassmorphism */
+.glass-nav {
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-modal {
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Cinematic Card Hover Effects */
+.cinematic-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.cinematic-card .card-img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cinematic-card:hover .card-img {
+  transform: scale(1.06);
+}
+
+.cinematic-card .card-overlay {
+  transition: background 0.5s ease;
+  background: linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.85) 100%);
+}
+
+.cinematic-card:hover .card-overlay {
+  background: linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.95) 100%);
+}
+
+.cinematic-card .card-title {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cinematic-card:hover .card-title {
+  transform: translateY(-6px);
+}
+
+.cinematic-card .card-desc {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.editable-highlight {
+  position: relative;
+  outline: 1px dashed rgba(255, 255, 255, 0.3);
+  outline-offset: 4px;
+  cursor: pointer;
+  transition: outline-color 0.2s ease, background-color 0.2s ease;
+}
+.editable-highlight:hover {
+  outline-color: #3b82f6;
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s infinite ease-in-out;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive container utility */
+.page-container {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: max(1rem, var(--safe-left));
+  padding-right: max(1rem, var(--safe-right));
+}
+
+@media (min-width: 640px) {
+  .page-container {
+    padding-left: max(1.5rem, var(--safe-left));
+    padding-right: max(1.5rem, var(--safe-right));
+  }
+}
+
+/* Landscape phone adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-section {
+    min-height: auto !important;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem) !important;
+  }
+}
+
+/* Tablet portrait */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .featured-card {
+    height: 420px;
+  }
+}
+
+/* Prevent iOS zoom on input focus */
+@media (max-width: 767px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Video player responsive */
+.aspect-video {
+  aspect-ratio: 16 / 9;
+}
+
+@supports not (aspect-ratio: 16 / 9) {
+  .aspect-video {
+    padding-bottom: 56.25%;
+    height: 0;
+    position: relative;
+  }
+  .aspect-video > * {
+    position: absolute;
+    inset: 0;
+  }
+}
