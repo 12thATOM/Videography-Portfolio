@@ -14,7 +14,7 @@ export const Cinematics = ({ onNavigate }) => {
   const handleCoverUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const result = await uploadFile(file);
+    const result = await uploadFile(file, 'covers/cinematics');
     if (result) updateData('cinematicsPage.coverImage', result.key);
     e.target.value = '';
   };

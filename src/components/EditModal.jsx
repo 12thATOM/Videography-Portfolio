@@ -73,12 +73,12 @@ export const EditModal = () => {
 
   if (!activeModal) return null;
 
-  const handleFileUpload = async (e, callback) => {
+  const handleFileUpload = async (e, folder, callback) => {
     const file = e.target.files[0];
     if (!file) return;
     setUploading(true);
     try {
-      const result = await uploadFile(file);
+      const result = await uploadFile(file, folder);
       if (result) callback(result.key, result.mimeType);
     } finally {
       setUploading(false);
@@ -124,7 +124,7 @@ export const EditModal = () => {
     if (!file) return;
     setUploading(true);
     try {
-      const result = await uploadFile(file);
+      const result = await uploadFile(file, 'covers/featured');
       if (result) {
         const updated = [...siteData.featuredWork];
         updated[cardIndex].coverImage = result.key;
@@ -213,7 +213,7 @@ export const EditModal = () => {
                       type="file"
                       accept="image/*"
                       className="hidden"
-                      onChange={(e) => handleFileUpload(e, (key) => updateData('hero.bgImage', key))}
+                      onChange={(e) => handleFileUpload(e, 'hero', (key) => updateData('hero.bgImage', key))}
                     />
                   </label>
                 </div>
@@ -249,7 +249,7 @@ export const EditModal = () => {
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={(e) => handleFileUpload(e, (key) => updateData('photographyPage.coverImage', key))}
+                    onChange={(e) => handleFileUpload(e, 'covers/photography', (key) => updateData('photographyPage.coverImage', key))}
                   />
                 </label>
               </div>
@@ -289,7 +289,7 @@ export const EditModal = () => {
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        onChange={(e) => handleFileUpload(e, (key) => setNewPhoto({ ...newPhoto, url: key }))}
+                        onChange={(e) => handleFileUpload(e, 'photos', (key) => setNewPhoto({ ...newPhoto, url: key }))}
                       />
                     </label>
                   </div>
@@ -336,7 +336,7 @@ export const EditModal = () => {
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={(e) => handleFileUpload(e, (key) => updateData('cinematicsPage.coverImage', key))}
+                    onChange={(e) => handleFileUpload(e, 'covers/cinematics', (key) => updateData('cinematicsPage.coverImage', key))}
                   />
                 </label>
               </div>
@@ -366,7 +366,7 @@ export const EditModal = () => {
                         type="file"
                         accept="video/*,.mp4,.webm,.mov,.avi,.mkv,.ogv,.mpeg,.mpg,.m4v"
                         className="hidden"
-                        onChange={(e) => handleFileUpload(e, (key, mime) => setNewCinematic({ ...newCinematic, videoUrl: key, mimeType: mime, videoType: 'file' }))}
+                        onChange={(e) => handleFileUpload(e, 'videos/cinematics', (key, mime) => setNewCinematic({ ...newCinematic, videoUrl: key, mimeType: mime, videoType: 'file' }))}
                       />
                     </label>
                   </div>
@@ -379,7 +379,7 @@ export const EditModal = () => {
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        onChange={(e) => handleFileUpload(e, (key) => setNewCinematic({ ...newCinematic, poster: key }))}
+                        onChange={(e) => handleFileUpload(e, 'posters', (key) => setNewCinematic({ ...newCinematic, poster: key }))}
                       />
                     </label>
                   </div>
@@ -427,7 +427,7 @@ export const EditModal = () => {
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={(e) => handleFileUpload(e, (key) => updateData('videographyPage.coverImage', key))}
+                    onChange={(e) => handleFileUpload(e, 'covers/videography', (key) => updateData('videographyPage.coverImage', key))}
                   />
                 </label>
               </div>
@@ -467,7 +467,7 @@ export const EditModal = () => {
                         type="file"
                         accept="video/*,.mp4,.webm,.mov,.avi,.mkv,.ogv,.mpeg,.mpg,.m4v"
                         className="hidden"
-                        onChange={(e) => handleFileUpload(e, (key, mime) => setNewVideography({ ...newVideography, videoUrl: key, mimeType: mime, videoType: 'file' }))}
+                        onChange={(e) => handleFileUpload(e, 'videos/videography', (key, mime) => setNewVideography({ ...newVideography, videoUrl: key, mimeType: mime, videoType: 'file' }))}
                       />
                     </label>
                   </div>
@@ -509,7 +509,7 @@ export const EditModal = () => {
                     type="file"
                     accept="image/*"
                     className="hidden"
-                    onChange={(e) => handleFileUpload(e, (key) => updateData('about.profileImage', key))}
+                    onChange={(e) => handleFileUpload(e, 'profile', (key) => updateData('about.profileImage', key))}
                   />
                 </label>
               </div>

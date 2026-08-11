@@ -15,7 +15,7 @@ export const Photography = ({ onNavigate }) => {
   const handleCoverUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const result = await uploadFile(file);
+    const result = await uploadFile(file, 'covers/photography');
     if (result) updateData('photographyPage.coverImage', result.key);
     e.target.value = '';
   };

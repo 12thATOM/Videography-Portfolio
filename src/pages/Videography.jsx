@@ -14,7 +14,7 @@ export const Videography = ({ onNavigate }) => {
   const handleCoverUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const result = await uploadFile(file);
+    const result = await uploadFile(file, 'covers/videography');
     if (result) updateData('videographyPage.coverImage', result.key);
     e.target.value = '';
   };

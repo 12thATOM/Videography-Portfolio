@@ -20,9 +20,9 @@ export const AdminLoginModal = () => {
 
   if (!showLoginModal) return null;
 
-  const handleLoginSubmit = (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const success = loginAdmin(inputPass);
+    const success = await loginAdmin(inputPass);
     if (success) {
       setErrorMsg('');
       setInputPass('');
@@ -31,9 +31,9 @@ export const AdminLoginModal = () => {
     }
   };
 
-  const handleChangePassSubmit = (e) => {
+  const handleChangePassSubmit = async (e) => {
     e.preventDefault();
-    const success = updateAdminPassword(oldPassInput, newPassInput);
+    const success = await updateAdminPassword(oldPassInput, newPassInput);
     if (success) {
       setOldPassInput('');
       setNewPassInput('');
